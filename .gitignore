@@ -87,12 +87,12 @@ crashlytics-build.properties
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
 
-/.idea/.idea.My Little Universe/.idea/codeStyles/codeStyleConfig.xml
-/.idea/.idea.My Little Universe/.idea/contentModel.xml
-/.idea/.idea.My Little Universe/.idea/encodings.xml
-/.idea/.idea.My Little Universe/.idea/indexLayout.xml
-/.idea/.idea.My Little Universe/.idea/modules.xml
-/.idea/.idea.My Little Universe/.idea/projectSettingsUpdater.xml
-/.idea/.idea.My Little Universe/.idea/vcs.xml
-/.idea/.idea.My Little Universe/.idea/workspace.xml
-/.idea/.idea.My Little Universe/riderModule.iml
+/.idea/.idea.*/.idea/codeStyles/codeStyleConfig.xml
+/.idea/.idea.*/.idea/contentModel.xml
+/.idea/.idea.*/.idea/encodings.xml
+/.idea/.idea.*/.idea/indexLayout.xml
+/.idea/.idea.*/.idea/modules.xml
+/.idea/.idea.*/.idea/projectSettingsUpdater.xml
+/.idea/.idea.*/.idea/vcs.xml
+/.idea/.idea.*/.idea/workspace.xml
+/.idea/.idea.*/riderModule.iml
