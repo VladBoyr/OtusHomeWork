@@ -23,6 +23,9 @@
 # Recordings can get excessive in size
 /[Rr]ecordings/
 
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!/[Aa]ssets/**/*.meta
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
@@ -83,3 +86,13 @@ crashlytics-build.properties
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+
+/.idea/.idea.My Little Universe/.idea/codeStyles/codeStyleConfig.xml
+/.idea/.idea.My Little Universe/.idea/contentModel.xml
+/.idea/.idea.My Little Universe/.idea/encodings.xml
+/.idea/.idea.My Little Universe/.idea/indexLayout.xml
+/.idea/.idea.My Little Universe/.idea/modules.xml
+/.idea/.idea.My Little Universe/.idea/projectSettingsUpdater.xml
+/.idea/.idea.My Little Universe/.idea/vcs.xml
+/.idea/.idea.My Little Universe/.idea/workspace.xml
+/.idea/.idea.My Little Universe/riderModule.iml
