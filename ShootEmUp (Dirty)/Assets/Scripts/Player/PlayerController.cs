@@ -8,18 +8,15 @@ namespace Player
         private readonly IInputService _inputService;
         private readonly PlayerFacade _playerFacade;
         private readonly WeaponService _weaponService;
-        private readonly BulletConfig _bulletConfig;
 
         public PlayerController(
             IInputService input,
             PlayerFacade player,
-            WeaponService weaponService,
-            BulletConfig config)
+            WeaponService weaponService)
         {
             this._inputService = input;
             this._playerFacade = player;
             this._weaponService = weaponService;
-            this._bulletConfig = config;
         }
 
         public void Enable()
@@ -43,7 +40,7 @@ namespace Player
 
         private void OnFire()
         {
-            this._weaponService.Fire(this._playerFacade.Weapon, this._bulletConfig, Vector2.up);
+            this._weaponService.Fire(this._playerFacade.Weapon, Vector2.up);
         }
     }
 }

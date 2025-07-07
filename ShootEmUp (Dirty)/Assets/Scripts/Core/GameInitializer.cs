@@ -10,7 +10,6 @@ namespace Core
         [Header("Player")]
         [SerializeField] private PlayerFacade playerFacade;
         [SerializeField] private PlayerInputService playerInputService;
-        [SerializeField] private BulletConfig playerBulletConfig;
 
         [Header("Enemies")]
         [SerializeField] private EnemyFactory enemyFactory;
@@ -34,8 +33,7 @@ namespace Core
             this._playerController = new PlayerController(
                 this.playerInputService,
                 this.playerFacade, 
-                weaponService,
-                this.playerBulletConfig);
+                weaponService);
 
             this.gameStateController.Initialize(playerFacade);
         }

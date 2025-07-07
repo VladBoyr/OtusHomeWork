@@ -10,7 +10,6 @@ namespace Enemies
     {
         [SerializeField] private EnemyFactory enemyFactory;
         [SerializeField] private float spawnInterval = 1.0f;
-        [SerializeField] private BulletConfig enemyBulletConfig;
 
         private WeaponService _weaponService;
         private readonly HashSet<EnemyFacade> _activeEnemies = new();
@@ -57,7 +56,7 @@ namespace Enemies
 
         private void OnEnemyFire(WeaponComponent weapon, Vector2 targetDirection)
         {
-            this._weaponService.Fire(weapon, this.enemyBulletConfig, targetDirection);
+            this._weaponService.Fire(weapon, targetDirection);
         }
     }
 }

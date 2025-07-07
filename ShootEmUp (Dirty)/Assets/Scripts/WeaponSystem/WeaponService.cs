@@ -13,7 +13,7 @@ namespace WeaponSystem
             this._bulletService = bulletService;
         }
 
-        public void Fire(WeaponComponent weapon, BulletConfig config, Vector2 targetDirection)
+        public void Fire(WeaponComponent weapon, Vector2 targetDirection)
         {
             var teamComponent = weapon.GetComponent<TeamComponent>();
             if (teamComponent == null) return;
@@ -25,9 +25,9 @@ namespace WeaponSystem
             var args = new BulletService.BulletArgs
             {
                 Position = weapon.Position,
-                Velocity = weapon.Rotation * targetDirection * config.Speed,
-                Color = config.Color,
-                Damage = config.Damage,
+                Velocity = weapon.Rotation * targetDirection * weapon.BulletConfig.Speed,
+                Color = weapon.BulletConfig.Color,
+                Damage = weapon.BulletConfig.Damage,
                 PhysicsLayer = (int)bulletLayer,
                 IsPlayer = teamComponent.IsPlayer
             };

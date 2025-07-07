@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3926786963072264220}
+  <BulletConfig>k__BackingField: {fileID: 11400000, guid: 8d6c81ed877a1814a98c4dab2461cca3,
+    type: 2}
 --- !u!114 &4052655217251535180
 MonoBehaviour:
   m_ObjectHideFlags: 0
