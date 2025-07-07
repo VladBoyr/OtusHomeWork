@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 7936085547460007407}
   - component: {fileID: 5568771391735819375}
   - component: {fileID: 659620479434099170}
-  - component: {fileID: 5568771391735819379}
-  - component: {fileID: 5568771391735819372}
-  - component: {fileID: 5568771391735819373}
-  - component: {fileID: 5568771391735819374}
-  - component: {fileID: 8186052948131603766}
-  - component: {fileID: 6896809305229427933}
+  - component: {fileID: 907607939902828495}
+  - component: {fileID: 6293707890798822902}
+  - component: {fileID: 3991825777385362448}
+  - component: {fileID: -7947268315507068678}
+  - component: {fileID: 2801171534924645408}
+  - component: {fileID: 4284436571606021563}
+  - component: {fileID: -8736098160512765684}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Untagged
@@ -130,7 +131,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5568771391735819379
+--- !u!114 &907607939902828495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,11 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52112fd3e5414bf991b1d54804cb28f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 520fd2e2496140cf9e7256e3dbb09ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
---- !u!114 &5568771391735819372
+  <IsPlayer>k__BackingField: 0
+--- !u!114 &6293707890798822902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,12 +153,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce88fee201654f6e8064002ed15de594, type: 3}
+  m_Script: {fileID: 11500000, guid: 398745c1ac324242a68632deab81480e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 659620479434099170}
   speed: 7
---- !u!114 &5568771391735819373
+--- !u!114 &3991825777385362448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,11 +167,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5daa1be9cc40a78a2f07cd53e5b47e, type: 3}
+  m_Script: {fileID: 11500000, guid: c35b0762616647ea83005566ccc17128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 3
---- !u!114 &5568771391735819374
+--- !u!114 &-7947268315507068678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +180,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce164c84a74a425f8d2e82764aef9e34, type: 3}
+  m_Script: {fileID: 11500000, guid: a19fc954919448718afc8851cc4c8885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3195880656587174614}
---- !u!114 &8186052948131603766
+--- !u!114 &2801171534924645408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,11 +193,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bdb5771141e4cf18c434a69ec116e09, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c2001fdaedf43718dc6f9fef3947b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveComponent: {fileID: 5568771391735819372}
---- !u!114 &6896809305229427933
+  moveComponent: {fileID: 6293707890798822902}
+  stoppingDistance: 0.25
+--- !u!114 &4284436571606021563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,12 +207,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba7965842e74a9f89ba3aa66d61da46, type: 3}
+  m_Script: {fileID: 11500000, guid: 972dbcac7ab24bae8d3a5dc7b74033b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponComponent: {fileID: 5568771391735819374}
-  moveAgent: {fileID: 8186052948131603766}
-  countdown: 1
+  weaponComponent: {fileID: -7947268315507068678}
+  moveAgent: {fileID: 2801171534924645408}
+  countdown: 2
+--- !u!114 &-8736098160512765684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b8a8d891604ea3b050f223cfdbffe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MoveAgent>k__BackingField: {fileID: 2801171534924645408}
+  <AttackAgent>k__BackingField: {fileID: 4284436571606021563}
+  <Health>k__BackingField: {fileID: 3991825777385362448}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0

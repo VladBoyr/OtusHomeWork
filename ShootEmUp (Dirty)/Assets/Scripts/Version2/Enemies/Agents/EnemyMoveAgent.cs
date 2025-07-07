@@ -34,7 +34,7 @@ namespace Version2.Enemies.Agents
                 return;
             }
 
-            var direction = vectorToDestination.normalized;
+            var direction = vectorToDestination.normalized * Time.fixedDeltaTime;
             
             this.moveComponent.MoveByRigidbodyVelocity(direction);
         }

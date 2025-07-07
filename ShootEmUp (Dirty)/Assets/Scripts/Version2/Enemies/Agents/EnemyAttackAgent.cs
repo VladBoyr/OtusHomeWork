@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Version2.Components;
 
@@ -6,7 +5,9 @@ namespace Version2.Enemies.Agents
 {
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
-        public event Action<WeaponComponent> OnFire;
+        public delegate void FireHandler(WeaponComponent weapon, Vector2 targetDirection);
+
+        public event FireHandler OnFire;
 
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private EnemyMoveAgent moveAgent;
@@ -47,7 +48,8 @@ namespace Version2.Enemies.Agents
 
         private void Fire()
         {
-            this.OnFire?.Invoke(weaponComponent);
+            var targetDirection = ((Vector2)this._target.transform.position - this.weaponComponent.Position).normalized;
+            this.OnFire?.Invoke(weaponComponent, targetDirection);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Version2.Enemies
             }
         }
 
-        public EnemyFacade CreateEnemy()
+        public EnemyFacade SpawnEnemy()
         {
             if (this._enemyPool.TryDequeue(out var enemy) == false)
             {

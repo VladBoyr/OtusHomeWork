@@ -10,8 +10,8 @@ namespace Version2.Components
         
         public void MoveByRigidbodyVelocity(Vector2 direction)
         {
-            var velocity = direction * this.speed;
-            this.rigidbody2D.velocity = velocity;
+            var nextPosition = this.rigidbody2D.position + direction * this.speed;
+            this.rigidbody2D.MovePosition(nextPosition);
         }
 
         private void OnValidate()

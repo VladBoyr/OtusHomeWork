@@ -32,7 +32,7 @@ namespace Version2.Enemies
             {
                 yield return new WaitForSeconds(this.spawnInterval);
 
-                var enemy = this.enemyFactory.CreateEnemy();
+                var enemy = this.enemyFactory.SpawnEnemy();
                 if (enemy == null) continue;
 
                 enemy.gameObject.SetActive(true);
@@ -55,9 +55,9 @@ namespace Version2.Enemies
             this.enemyFactory.UnspawnEnemy(enemy);
         }
 
-        private void OnEnemyFire(WeaponComponent weapon)
+        private void OnEnemyFire(WeaponComponent weapon, Vector2 targetDirection)
         {
-            this._weaponService.Fire(weapon, this.enemyBulletConfig);
+            this._weaponService.Fire(weapon, this.enemyBulletConfig, targetDirection);
         }
     }
 }

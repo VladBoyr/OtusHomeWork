@@ -43,7 +43,7 @@ namespace Version2.Player
 
         private void OnFire()
         {
-            this._weaponService.Fire(this._playerFacade.Weapon, this._bulletConfig);
+            this._weaponService.Fire(this._playerFacade.Weapon, this._bulletConfig, Vector2.up);
         }
     }
 }
