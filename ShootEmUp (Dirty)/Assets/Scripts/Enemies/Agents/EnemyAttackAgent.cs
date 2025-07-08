@@ -1,3 +1,4 @@
+using System;
 using Components;
 using UnityEngine;
 
@@ -5,53 +6,56 @@ namespace Enemies.Agents
 {
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
-        public delegate void FireHandler(TeamComponent team, WeaponComponent weapon, Vector2 targetDirection);
+        public event Action<Vector2> OnFire;
 
-        public event FireHandler OnFire;
-
-        [SerializeField] private TeamComponent teamComponent;
-        [SerializeField] private WeaponComponent weaponComponent;
-        [SerializeField] private EnemyMoveAgent moveAgent;
+        [SerializeField] private WeaponComponent weapon;
         [SerializeField] private float countdown = 1.0f;
 
         private Transform _target;
+        private bool _canFire;
+        private bool _readyToFire;
         private float _currentTime;
-
+        
         public void SetTarget(Transform target)
         {
             this._target = target;
         }
 
+        public void SetReadyToFire(bool readyToFire)
+        {
+            this._readyToFire = readyToFire;
+        }
+
         private void OnEnable()
         {
             this._currentTime = countdown;
+            this._canFire = true;
+        }
+
+        private void OnDisable()
+        {
+            this._canFire = false;
         }
 
         private void FixedUpdate()
         {
-            if (this.moveAgent.IsReached == false || this._target == null)
-            {
-                return;
-            }
-
-            if (this._target.GetComponent<HitPointsComponent>().IsDied() == false)
+            if (this._canFire == false || this._readyToFire == false || this._target == null)
             {
                 return;
             }
 
             this._currentTime -= Time.fixedDeltaTime;
-
-            if (!(this._currentTime <= 0)) return;
+            if (this._currentTime > 0) return;
+            this._currentTime += countdown;
             
             this.Fire();
-            this._currentTime += countdown;
         }
 
         private void Fire()
         {
-            var targetDirection = (Vector2)this._target.transform.position - this.weaponComponent.Position;
+            var targetDirection = (Vector2)this._target.transform.position - this.weapon.Position;
             targetDirection = targetDirection.normalized;
-            this.OnFire?.Invoke(this.teamComponent, this.weaponComponent, targetDirection);
+            this.OnFire?.Invoke(targetDirection);
         }
     }
 }

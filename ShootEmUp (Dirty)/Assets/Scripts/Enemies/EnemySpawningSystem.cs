@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Player;
@@ -12,14 +13,10 @@ namespace Enemies
         [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private float spawnInterval = 1.0f;
         [SerializeField] private Transform world;
+        [SerializeField] private PlayerUnit playerUnit;
 
-        private PlayerUnit _playerUnit;
         private readonly HashSet<EnemyUnit> _activeEnemies = new();
-
-        public void Initialize(PlayerUnit playerUnit)
-        {
-            this._playerUnit = playerUnit;
-        }
+        private readonly Dictionary<EnemyUnit, Action<GameObject>> _deathHandlers = new();
 
         // ReSharper disable once IteratorNeverReturns
         private IEnumerator Start()
@@ -32,26 +29,36 @@ namespace Enemies
                 Assert.IsNotNull(enemy,
                     $"Фабрика '{this.enemyFactory.GetType()}' должна выпускать '{enemy.GetType()}'!");
 
-                if (this._activeEnemies.Add(enemy) == false) continue;
+                enemy.SetParent(this.world);
+                enemy.SetPosition(this.enemyPositions.RandomSpawnPosition().position);
+                enemy.SetDestination(this.enemyPositions.RandomAttackPosition().position);
+                enemy.SetTarget(this.playerUnit.transform);
 
-                enemy.Initialize(
-                    this.world,
-                    this.enemyPositions.RandomSpawnPosition().position,
-                    this.enemyPositions.RandomAttackPosition().position,
-                    this._playerUnit.transform,
-                    );
+                if (this._activeEnemies.Add(enemy))
+                {
+                    Action<GameObject> handler = gameObj => OnEnemyDestroyed(gameObj, enemy);
+                    _deathHandlers.Add(enemy, handler);
+                    enemy.HitPointsComponent.OnDeath += handler;
+                    enemy.gameObject.SetActive(true);
+                }
+                else
+                {
+                    this.enemyFactory.RemoveObject(enemy);
+                }
             }
         }
 
-        private void OnEnemyDestroyed(GameObject enemyObject)
+        private void OnEnemyDestroyed(GameObject _, EnemyUnit enemy)
         {
-            if (enemyObject.TryGetComponent<EnemyUnit>(out var enemy) == false) return;
-
             if (this._activeEnemies.Remove(enemy) == false) return;
 
-            enemy.Health.OnDeath -= OnEnemyDestroyed;
-            enemy.AttackAgent.OnFire -= OnEnemyFire;
-            this.enemyFactory.RemoveEnemy(enemy);
+            if (this._deathHandlers.TryGetValue(enemy, out var handler))
+            {
+                enemy.HitPointsComponent.OnDeath -= handler;
+                this._deathHandlers.Remove(enemy);
+            }
+
+            this.enemyFactory.RemoveObject(enemy);
         }
     }
 }

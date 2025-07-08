@@ -41,7 +41,7 @@ namespace Weapons
             Assert.IsNotNull(bullet,
                 $"Фабрика '{this.bulletFactory.GetType()}' должна выпускать '{bullet.GetType()}'!");
 
-            bullet.transform.SetParent(this.world);
+            bullet.SetParent(this.world);
             bullet.SetPosition(weapon.Position);
             bullet.SetColor(weapon.BulletConfig.Color);
             bullet.SetPhysicsLayer(bulletLayer);

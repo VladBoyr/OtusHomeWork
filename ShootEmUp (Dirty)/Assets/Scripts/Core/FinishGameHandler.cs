@@ -4,7 +4,7 @@ namespace Core
 {
     public static class FinishGameHandler
     {
-        public static void OnPlayerDeath(GameObject playerObject)
+        public static void OnPlayerDeath(GameObject _)
         {
             FinishGame();
         }

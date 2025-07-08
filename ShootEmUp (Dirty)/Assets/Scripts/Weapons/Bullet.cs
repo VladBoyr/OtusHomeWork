@@ -26,6 +26,11 @@ namespace Weapons
             this.gameObject.layer = (int)physicsLayer;
         }
 
+        public void SetParent(Transform parent)
+        {
+            this.transform.SetParent(parent);
+        }
+
         public void SetPosition(Vector3 position)
         {
             this.transform.position = position;

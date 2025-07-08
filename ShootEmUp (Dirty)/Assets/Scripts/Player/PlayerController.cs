@@ -22,32 +22,27 @@ namespace Player
 
         public void Enable()
         {
-            this._inputService.OnFire += this.OnFire;
-            this._inputService.OnMove += this.OnMove;
+            this._inputService.OnFire += this.Fire;
+            this._inputService.OnMove += this.Move;
             this._player.HitPointsComponent.OnDeath += FinishGameHandler.OnPlayerDeath;
         }
 
         public void Disable()
         {
-            this._inputService.OnFire -= this.OnFire;
-            this._inputService.OnMove -= this.OnMove;
+            this._inputService.OnFire -= this.Fire;
+            this._inputService.OnMove -= this.Move;
             this._player.HitPointsComponent.OnDeath -= FinishGameHandler.OnPlayerDeath;
         }
 
-        private void OnFire()
+        private void Fire()
         {
-            this._weaponService.Fire(
-                this._player.TeamComponent,
-                this._player.WeaponComponent,
-                Vector2.up);
+            this._weaponService.Fire(this._player.TeamComponent, this._player.WeaponComponent, Vector2.up);
         }
 
-        private void OnMove(Vector2 moveDirection)
+        private void Move(Vector2 moveDirection)
         {
-            if (moveDirection != Vector2.zero)
-            {
-                this._player.MoveComponent.MoveByRigidbodyVelocity(moveDirection * Time.fixedDeltaTime);
-            }
+            if (moveDirection == Vector2.zero) return;
+            this._player.MoveComponent.MoveByRigidbodyVelocity(moveDirection * Time.fixedDeltaTime);
         }
     }
 }
