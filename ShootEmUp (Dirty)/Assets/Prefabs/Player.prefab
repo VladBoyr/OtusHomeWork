@@ -196,9 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f128e139bbe427db298e7c2a4f3e92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TeamComponent>k__BackingField: {fileID: 4052655217251535180}
   <MoveComponent>k__BackingField: {fileID: -3007686948641211291}
   <WeaponComponent>k__BackingField: {fileID: 6249707042562418215}
-  <Health>k__BackingField: {fileID: -378895844586545752}
+  <HitPointsComponent>k__BackingField: {fileID: -378895844586545752}
 --- !u!1 &3926786963072264211
 GameObject:
   m_ObjectHideFlags: 0

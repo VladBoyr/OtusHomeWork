@@ -9,7 +9,13 @@ namespace Enemies
     {
         [SerializeField] private EnemyAttackAgent enemyAttackAgent;
         [SerializeField] private EnemyMoveAgent enemyMoveAgent;
-        [SerializeField] private WeaponService weaponService;
+
+        private WeaponService _weaponService;
+
+        public void Initialize(WeaponService weaponService)
+        {
+            this._weaponService = weaponService;
+        }
 
         public void OnEnable()
         {
@@ -47,7 +53,7 @@ namespace Enemies
 
         private void Fire(Vector2 targetDirection)
         {
-            this.weaponService.Fire(this.TeamComponent, this.WeaponComponent, targetDirection);
+            this._weaponService.Fire(this.TeamComponent, this.WeaponComponent, targetDirection);
         }
         
         private void Move(Vector2 moveDirection)

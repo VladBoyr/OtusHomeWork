@@ -21,6 +21,13 @@ namespace Core
             }
         }
 
+        public void InitializeObject(T obj)
+        {
+            (obj as MonoBehaviour)?.
+        }
+
+        enemy.Initialize(this._weaponService);
+
         public T CreateObject()
         {
             if (this._objectPool.TryDequeue(out var obj) == false)

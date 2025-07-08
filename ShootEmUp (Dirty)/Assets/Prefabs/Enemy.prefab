@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2001fdaedf43718dc6f9fef3947b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveComponent: {fileID: 6293707890798822902}
   stoppingDistance: 0.25
 --- !u!114 &4284436571606021563
 MonoBehaviour:
@@ -212,8 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972dbcac7ab24bae8d3a5dc7b74033b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponComponent: {fileID: -7947268315507068678}
-  moveAgent: {fileID: 2801171534924645408}
+  weapon: {fileID: -7947268315507068678}
   countdown: 2
 --- !u!114 &-8736098160512765684
 MonoBehaviour:
@@ -227,9 +225,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b8a8d891604ea3b050f223cfdbffe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MoveAgent>k__BackingField: {fileID: 2801171534924645408}
-  <AttackAgent>k__BackingField: {fileID: 4284436571606021563}
-  <Health>k__BackingField: {fileID: 3991825777385362448}
+  <TeamComponent>k__BackingField: {fileID: 907607939902828495}
+  <MoveComponent>k__BackingField: {fileID: 6293707890798822902}
+  <WeaponComponent>k__BackingField: {fileID: -7947268315507068678}
+  <HitPointsComponent>k__BackingField: {fileID: 3991825777385362448}
+  enemyAttackAgent: {fileID: 4284436571606021563}
+  enemyMoveAgent: {fileID: 2801171534924645408}
+  weaponService: {fileID: 0}
 --- !u!1 &2239154907127902911
 GameObject:
   m_ObjectHideFlags: 0
