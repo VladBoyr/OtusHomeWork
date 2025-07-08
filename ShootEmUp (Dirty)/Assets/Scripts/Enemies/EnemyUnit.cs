@@ -55,16 +55,22 @@ namespace Enemies
         {
             this._weaponService.Fire(this.TeamComponent, this.WeaponComponent, targetDirection);
         }
-        
+
         private void Move(Vector2 moveDirection)
         {
-            if (moveDirection == Vector2.zero) return;
-            this.MoveComponent.MoveByRigidbodyVelocity(moveDirection * Time.fixedDeltaTime);
+            this.MoveComponent.SetVelocity(moveDirection);
         }
-        
+
         private void AttackPositionReached()
         {
             this.enemyAttackAgent.SetReadyToFire(true);
+        }
+
+        public void ResetState()
+        {
+            this.HitPointsComponent.Reset();
+            this.enemyMoveAgent.ResetAgent();
+            this.enemyAttackAgent.ResetAgent();
         }
     }
 }

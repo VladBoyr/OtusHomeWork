@@ -46,12 +46,19 @@ namespace Enemies.Agents
             if (vectorToDestination.magnitude <= this.stoppingDistance)
             {
                 this._destinationReached = true;
+                this.OnMove?.Invoke(Vector2.zero);
                 this.OnDestinationReached?.Invoke();
                 return;
             }
 
-            var direction = vectorToDestination.normalized * Time.fixedDeltaTime;
+            var direction = vectorToDestination.normalized;
             this.OnMove?.Invoke(direction);
+        }
+        
+        public void ResetAgent()
+        {
+            this._destinationReached = false;
+            this._canMove = false;
         }
     }
 }

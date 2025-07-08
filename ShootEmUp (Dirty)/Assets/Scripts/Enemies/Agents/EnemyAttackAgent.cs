@@ -57,5 +57,12 @@ namespace Enemies.Agents
             targetDirection = targetDirection.normalized;
             this.OnFire?.Invoke(targetDirection);
         }
+    
+        public void ResetAgent()
+        {
+            this._readyToFire = false;
+            this._canFire = false;
+            this._currentTime = countdown;
+        }
     }
 }

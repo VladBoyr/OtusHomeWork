@@ -20,6 +20,12 @@ namespace Level
 
         private void FixedUpdate()
         {
+            this._myTransform.position -= new Vector3(
+                0,
+                this.backgroundParams.movingSpeedY * Time.fixedDeltaTime,
+                0
+            );
+
             if (this._myTransform.position.y <= this.backgroundParams.endPositionY)
             {
                 this._myTransform.position = new Vector3(
@@ -28,12 +34,6 @@ namespace Level
                     this._positionZ
                 );
             }
-
-            this._myTransform.position -= new Vector3(
-                this._positionX,
-                this.backgroundParams.movingSpeedY * Time.fixedDeltaTime,
-                this._positionZ
-            );
         }
 
         [Serializable]

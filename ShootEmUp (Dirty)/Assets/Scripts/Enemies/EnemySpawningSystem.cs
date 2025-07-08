@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Weapons;
 
 namespace Enemies
 {
@@ -14,12 +15,25 @@ namespace Enemies
         [SerializeField] private float spawnInterval = 1.0f;
         [SerializeField] private Transform world;
         [SerializeField] private PlayerUnit playerUnit;
+        [SerializeField] private WeaponService weaponService;
 
         private readonly HashSet<EnemyUnit> _activeEnemies = new();
         private readonly Dictionary<EnemyUnit, Action<GameObject>> _deathHandlers = new();
 
+        private Coroutine _spawningCoroutine;
+
+        private void OnEnable() {
+            _spawningCoroutine = StartCoroutine(SpawningProcess());
+        }
+
+        private void OnDisable() {
+            if (_spawningCoroutine != null) {
+                StopCoroutine(_spawningCoroutine);
+            }
+        }
+
         // ReSharper disable once IteratorNeverReturns
-        private IEnumerator Start()
+        private IEnumerator SpawningProcess()
         {
             while (true)
             {
@@ -29,6 +43,7 @@ namespace Enemies
                 Assert.IsNotNull(enemy,
                     $"Фабрика '{this.enemyFactory.GetType()}' должна выпускать '{enemy.GetType()}'!");
 
+                enemy.Initialize(this.weaponService);
                 enemy.SetParent(this.world);
                 enemy.SetPosition(this.enemyPositions.RandomSpawnPosition().position);
                 enemy.SetDestination(this.enemyPositions.RandomAttackPosition().position);

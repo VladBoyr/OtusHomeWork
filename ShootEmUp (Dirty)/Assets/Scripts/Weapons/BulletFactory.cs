@@ -5,10 +5,11 @@ namespace Weapons
 {
     public sealed class BulletFactory : ObjectPool<Bullet>
     {
-        public override void RemoveObject(Bullet bullet)
+        protected override void OnReturnToPool(Bullet bullet)
         {
+            base.OnReturnToPool(bullet);
             bullet.SetVelocity(Vector2.zero);
-            base.RemoveObject(bullet);
+            bullet.ClearCollisionHandlers();
         }
     }
 }

@@ -41,8 +41,7 @@ namespace Player
 
         private void Move(Vector2 moveDirection)
         {
-            if (moveDirection == Vector2.zero) return;
-            this._player.MoveComponent.MoveByRigidbodyVelocity(moveDirection * Time.fixedDeltaTime);
+            this._player.MoveComponent.SetVelocity(moveDirection);
         }
     }
 }

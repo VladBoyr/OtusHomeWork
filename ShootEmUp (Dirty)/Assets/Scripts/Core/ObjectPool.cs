@@ -17,30 +17,38 @@ namespace Core
             for (var i = 0; i < this.initialCount; i++)
             {
                 var obj = Instantiate(this.objectPrefab, this.poolContainer);
-                InitializeObject(obj);
                 this._objectPool.Enqueue(obj);
             }
-        }
-
-        protected virtual void InitializeObject(T obj)
-        {
         }
 
         public T CreateObject()
         {
             if (this._objectPool.TryDequeue(out var obj))
+            {
+                this.OnTakeFromPool(obj);
                 return obj;
+            }
 
             obj = Instantiate(this.objectPrefab, this.poolContainer);
-            InitializeObject(obj);
+            this.OnTakeFromPool(obj);
             return obj;
         }
 
-        public virtual void RemoveObject(T obj)
+        public void RemoveObject(T obj)
         {
             obj.transform.SetParent(this.poolContainer);
-            obj.gameObject.SetActive(false);
+            this.OnReturnToPool(obj);
             this._objectPool.Enqueue(obj);
+        }
+
+        protected virtual void OnTakeFromPool(T obj)
+        {
+            obj.gameObject.SetActive(true);
+        }
+
+        protected virtual void OnReturnToPool(T obj)
+        {
+            obj.gameObject.SetActive(false);
         }
     }
 }

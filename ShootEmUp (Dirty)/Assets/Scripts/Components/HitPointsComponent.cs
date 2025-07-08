@@ -7,15 +7,27 @@ namespace Components
     {
         public event Action<GameObject> OnDeath;
         
-        [SerializeField] private int hitPoints;
+        [SerializeField] private int initialHitPoints;
 
-        public bool IsDied() => this.hitPoints <= 0;
+        private int _currentHitPoints;
+
+        private void Awake()
+        {
+            _currentHitPoints = initialHitPoints;
+        }
+
+        public void Reset()
+        {
+            _currentHitPoints = initialHitPoints;
+        }
+
+        private bool IsDied() => this._currentHitPoints <= 0;
 
         public void TakeDamage(int damage)
         {
             if (this.IsDied()) return;
             
-            this.hitPoints -= damage;
+            this._currentHitPoints -= damage;
             if (this.IsDied())
             {
                 this.OnDeath?.Invoke(this.gameObject);

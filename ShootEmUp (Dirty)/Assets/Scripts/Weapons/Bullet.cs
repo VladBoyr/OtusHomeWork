@@ -13,12 +13,13 @@ namespace Weapons
         public bool IsPlayer { get; set; }
         public int Damage { get; set; }
 
-        [SerializeField] private new Rigidbody2D rigidbody2D;
+        // ReSharper disable once InconsistentNaming
+        [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         public void SetVelocity(Vector2 velocity)
         {
-            this.rigidbody2D.velocity = velocity;
+            this._rigidbody2D.velocity = velocity;
         }
 
         public void SetPhysicsLayer(PhysicsLayer physicsLayer)
