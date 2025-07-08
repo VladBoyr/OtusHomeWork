@@ -5,10 +5,11 @@ namespace Enemies.Agents
 {
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
-        public delegate void FireHandler(WeaponComponent weapon, Vector2 targetDirection);
+        public delegate void FireHandler(TeamComponent team, WeaponComponent weapon, Vector2 targetDirection);
 
         public event FireHandler OnFire;
 
+        [SerializeField] private TeamComponent teamComponent;
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private EnemyMoveAgent moveAgent;
         [SerializeField] private float countdown = 1.0f;
@@ -33,7 +34,7 @@ namespace Enemies.Agents
                 return;
             }
 
-            if (this._target.GetComponent<HitPointsComponent>().IsAlive() == false)
+            if (this._target.GetComponent<HitPointsComponent>().IsDied() == false)
             {
                 return;
             }
@@ -48,8 +49,9 @@ namespace Enemies.Agents
 
         private void Fire()
         {
-            var targetDirection = ((Vector2)this._target.transform.position - this.weaponComponent.Position).normalized;
-            this.OnFire?.Invoke(weaponComponent, targetDirection);
+            var targetDirection = (Vector2)this._target.transform.position - this.weaponComponent.Position;
+            targetDirection = targetDirection.normalized;
+            this.OnFire?.Invoke(this.teamComponent, this.weaponComponent, targetDirection);
         }
     }
 }

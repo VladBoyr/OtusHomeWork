@@ -1,62 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
-using Components;
+using Player;
 using UnityEngine;
-using WeaponSystem;
+using UnityEngine.Assertions;
 
 namespace Enemies
 {
     public sealed class EnemySpawningSystem : MonoBehaviour
     {
         [SerializeField] private EnemyFactory enemyFactory;
+        [SerializeField] private EnemyPositions enemyPositions;
         [SerializeField] private float spawnInterval = 1.0f;
+        [SerializeField] private Transform world;
 
-        private WeaponService _weaponService;
-        private readonly HashSet<EnemyFacade> _activeEnemies = new();
+        private PlayerUnit _playerUnit;
+        private readonly HashSet<EnemyUnit> _activeEnemies = new();
 
-        public void Initialize(WeaponService weaponService)
+        public void Initialize(PlayerUnit playerUnit)
         {
-            this._weaponService = weaponService;
-        }
-
-        public void StartSpawning()
-        {
-            this.StartCoroutine(this.SpawnRoutine());
+            this._playerUnit = playerUnit;
         }
 
         // ReSharper disable once IteratorNeverReturns
-        private IEnumerator SpawnRoutine()
+        private IEnumerator Start()
         {
             while (true)
             {
                 yield return new WaitForSeconds(this.spawnInterval);
 
-                var enemy = this.enemyFactory.SpawnEnemy();
-                if (enemy == null) continue;
+                var enemy = this.enemyFactory.CreateObject();
+                Assert.IsNotNull(enemy,
+                    $"Фабрика '{this.enemyFactory.GetType()}' должна выпускать '{enemy.GetType()}'!");
 
-                enemy.gameObject.SetActive(true);
-                
                 if (this._activeEnemies.Add(enemy) == false) continue;
 
-                enemy.Health.OnHpEmpty += OnEnemyDestroyed;
-                enemy.AttackAgent.OnFire += OnEnemyFire;
+                enemy.Initialize(
+                    this.world,
+                    this.enemyPositions.RandomSpawnPosition().position,
+                    this.enemyPositions.RandomAttackPosition().position,
+                    this._playerUnit.transform,
+                    );
             }
         }
 
         private void OnEnemyDestroyed(GameObject enemyObject)
         {
-            if (enemyObject.TryGetComponent<EnemyFacade>(out var enemy) == false) return;
+            if (enemyObject.TryGetComponent<EnemyUnit>(out var enemy) == false) return;
 
             if (this._activeEnemies.Remove(enemy) == false) return;
 
-            enemy.Health.OnHpEmpty -= OnEnemyDestroyed;
+            enemy.Health.OnDeath -= OnEnemyDestroyed;
             enemy.AttackAgent.OnFire -= OnEnemyFire;
-            this.enemyFactory.UnspawnEnemy(enemy);
-        }
-
-        private void OnEnemyFire(WeaponComponent weapon, Vector2 targetDirection)
-        {
-            this._weaponService.Fire(weapon, targetDirection);
+            this.enemyFactory.RemoveEnemy(enemy);
         }
     }
 }

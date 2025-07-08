@@ -5,20 +5,20 @@ namespace Components
 {
     public sealed class HitPointsComponent : MonoBehaviour
     {
-        public event Action<GameObject> OnHpEmpty;
+        public event Action<GameObject> OnDeath;
         
         [SerializeField] private int hitPoints;
 
-        public bool IsAlive() => this.hitPoints > 0;
+        public bool IsDied() => this.hitPoints <= 0;
 
         public void TakeDamage(int damage)
         {
-            if (this.IsAlive() == false) return;
+            if (this.IsDied()) return;
             
             this.hitPoints -= damage;
-            if (this.hitPoints <= 0)
+            if (this.IsDied())
             {
-                this.OnHpEmpty?.Invoke(this.gameObject);
+                this.OnDeath?.Invoke(this.gameObject);
             }
         }
     }

@@ -1,14 +1,16 @@
 using Enemies;
 using Player;
 using UnityEngine;
-using WeaponSystem;
+using UnityEngine.Serialization;
+using Weapons;
 
 namespace Core
 {
     public sealed class GameInitializer : MonoBehaviour
     {
+        [FormerlySerializedAs("playerFacade")]
         [Header("Player")]
-        [SerializeField] private PlayerFacade playerFacade;
+        [SerializeField] private PlayerUnit playerUnit;
         [SerializeField] private PlayerInputService playerInputService;
 
         [Header("Enemies")]
@@ -27,31 +29,22 @@ namespace Core
         {
             this.bulletService.Initialize();
             var weaponService = new WeaponService(this.bulletService);
-            this.enemyFactory.Initialize(this.playerFacade);
+
+            this.enemyFactory.Initialize(this.playerUnit);
             this.enemySpawningSystem.Initialize(weaponService);
 
             this._playerController = new PlayerController(
+                this.playerUnit,
                 this.playerInputService,
-                this.playerFacade, 
                 weaponService);
 
-            this.gameStateController.Initialize(playerFacade);
+            this.gameStateController.Initialize(playerUnit);
         }
 
         private void OnEnable()
         {
             this._playerController.Enable();
             this.gameStateController.Enable();
-        }
-
-        private void Start()
-        {
-            this.enemySpawningSystem.StartSpawning();
-        }
-
-        private void FixedUpdate()
-        {
-            this._playerController.OnFixedUpdate();
         }
 
         private void OnDisable()

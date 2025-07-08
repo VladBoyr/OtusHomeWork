@@ -6,7 +6,7 @@ namespace Player
     public sealed class PlayerInputService : MonoBehaviour, IInputService
     {
         public event Action OnFire;
-        public Vector2 MoveDirection { get; private set; }
+        public event Action<Vector2> OnMove;
 
         private void Update()
         {
@@ -17,7 +17,7 @@ namespace Player
         private void HandleMovementInput()
         {
             var horizontal = Input.GetAxis("Horizontal");
-            this.MoveDirection = new Vector2(horizontal, 0);
+            this.OnMove?.Invoke(new Vector2(horizontal, 0));
         }
 
         private void HandleFireInput()

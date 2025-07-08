@@ -14,9 +14,8 @@ namespace Level
         private void Awake()
         {
             this._myTransform = this.transform;
-            var currentPosition = this._myTransform.position;
-            this._positionX = currentPosition.x;
-            this._positionZ = currentPosition.z;
+            this._positionX = this.transform.position.x;
+            this._positionZ = this.transform.position.z;
         }
 
         private void FixedUpdate()

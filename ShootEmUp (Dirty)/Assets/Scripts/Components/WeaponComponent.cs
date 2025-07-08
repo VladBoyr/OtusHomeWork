@@ -1,5 +1,5 @@
 using UnityEngine;
-using WeaponSystem;
+using Weapons;
 
 namespace Components
 {

@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialCount: 50
-  container: {fileID: 1831741369}
+  poolContainer: {fileID: 1831741369}
   bulletPrefab: {fileID: 2522821798353482731, guid: 527791991047f824a9a0d5565d0e4e43,
     type: 3}
   levelBounds: {fileID: 2572952653776768186}
@@ -398,7 +398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyFactory: {fileID: 562298209}
   spawnInterval: 1
-  enemyBulletConfig: {fileID: 11400000, guid: 00e62e2dc84d8a34eab9dd3ae703cd34, type: 2}
 --- !u!114 &562298209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,9 +412,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: -8736098160512765684, guid: 2f8c2bdc8391efd4aac60a519385b639,
     type: 3}
-  container: {fileID: 178513672}
-  initialCount: 10
   enemyPositions: {fileID: 7166351703523243261}
+  initialCount: 10
+  poolContainer: {fileID: 178513672}
+  world: {fileID: 1683128698}
 --- !u!1 &883274639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1182,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3951702117947426122}
-  - component: {fileID: 3951702117947426123}
   - component: {fileID: 3951702117947426125}
   - component: {fileID: 3951702117947426124}
   m_Layer: 0
@@ -1210,18 +1209,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3951702117947426123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3951702117947426121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697fe7ba192e484db495320b9c01bcd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3951702117947426124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,7 +1235,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFacade: {fileID: 1325392256}
   playerInputService: {fileID: 1134805362}
-  playerBulletConfig: {fileID: 11400000, guid: 8d6c81ed877a1814a98c4dab2461cca3, type: 2}
   enemyFactory: {fileID: 562298209}
   enemySpawningSystem: {fileID: 562298208}
   bulletService: {fileID: 363245578}

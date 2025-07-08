@@ -1,46 +1,53 @@
+using Core;
 using UnityEngine;
-using WeaponSystem;
+using Weapons;
 
 namespace Player
 {
     public sealed class PlayerController
     {
+        private readonly PlayerUnit _player;
         private readonly IInputService _inputService;
-        private readonly PlayerFacade _playerFacade;
         private readonly WeaponService _weaponService;
 
         public PlayerController(
+            PlayerUnit player,
             IInputService input,
-            PlayerFacade player,
             WeaponService weaponService)
         {
+            this._player = player;
             this._inputService = input;
-            this._playerFacade = player;
             this._weaponService = weaponService;
         }
 
         public void Enable()
         {
             this._inputService.OnFire += this.OnFire;
+            this._inputService.OnMove += this.OnMove;
+            this._player.HitPointsComponent.OnDeath += FinishGameHandler.OnPlayerDeath;
         }
 
         public void Disable()
         {
             this._inputService.OnFire -= this.OnFire;
-        }
-
-        public void OnFixedUpdate()
-        {
-            var moveDirection = this._inputService.MoveDirection;
-            if (moveDirection != Vector2.zero)
-            {
-                this._playerFacade.Move(moveDirection * Time.fixedDeltaTime);
-            }
+            this._inputService.OnMove -= this.OnMove;
+            this._player.HitPointsComponent.OnDeath -= FinishGameHandler.OnPlayerDeath;
         }
 
         private void OnFire()
         {
-            this._weaponService.Fire(this._playerFacade.Weapon, Vector2.up);
+            this._weaponService.Fire(
+                this._player.TeamComponent,
+                this._player.WeaponComponent,
+                Vector2.up);
+        }
+
+        private void OnMove(Vector2 moveDirection)
+        {
+            if (moveDirection != Vector2.zero)
+            {
+                this._player.MoveComponent.MoveByRigidbodyVelocity(moveDirection * Time.fixedDeltaTime);
+            }
         }
     }
 }

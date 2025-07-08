@@ -6,6 +6,6 @@ namespace Player
     public interface IInputService
     {
         event Action OnFire;
-        Vector2 MoveDirection { get; }
+        event Action<Vector2> OnMove;
     }
 }
