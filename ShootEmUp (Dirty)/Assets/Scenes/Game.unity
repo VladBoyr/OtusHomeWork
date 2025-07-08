@@ -411,10 +411,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e5469be9914dfb8ce02b7f5429e2c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFactory: {fileID: 562298209}
+  enemyFactory: {fileID: 0}
   enemyPositions: {fileID: 0}
   spawnInterval: 1
-  world: {fileID: 0}
+  world: {fileID: 1683128698}
   playerUnit: {fileID: 0}
 --- !u!114 &562298209
 MonoBehaviour:
@@ -431,6 +431,7 @@ MonoBehaviour:
   objectPrefab: {fileID: 0}
   initialCount: 10
   poolContainer: {fileID: 178513672}
+  weaponService: {fileID: 0}
 --- !u!1 &883274639
 GameObject:
   m_ObjectHideFlags: 0

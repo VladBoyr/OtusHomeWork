@@ -24,7 +24,8 @@ namespace Weapons
             for (int index = 0, count = this._cache.Count; index < count; index++)
             {
                 var bullet = this._cache[index];
-                if (this.levelBounds.InBounds(bullet.transform.position) == false)
+                if (this.levelBounds.InBounds(bullet.transform.position) == false && 
+                    this._activeBullets.Remove(bullet))
                 {
                     this.bulletFactory.RemoveObject(bullet);
                 }

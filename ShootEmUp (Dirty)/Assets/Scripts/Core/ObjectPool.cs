@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Core
 {
     public abstract class ObjectPool<T> : MonoBehaviour
-        where T : Object
+        where T : MonoBehaviour
     {
         [SerializeField] protected T objectPrefab;
         [SerializeField] protected int initialCount;
@@ -17,32 +17,29 @@ namespace Core
             for (var i = 0; i < this.initialCount; i++)
             {
                 var obj = Instantiate(this.objectPrefab, this.poolContainer);
+                InitializeObject(obj);
                 this._objectPool.Enqueue(obj);
             }
         }
 
-        public void InitializeObject(T obj)
+        protected virtual void InitializeObject(T obj)
         {
-            (obj as MonoBehaviour)?.
         }
-
-        enemy.Initialize(this._weaponService);
 
         public T CreateObject()
         {
-            if (this._objectPool.TryDequeue(out var obj) == false)
-            {
-                obj = Instantiate(this.objectPrefab);
-            }
+            if (this._objectPool.TryDequeue(out var obj))
+                return obj;
 
+            obj = Instantiate(this.objectPrefab, this.poolContainer);
+            InitializeObject(obj);
             return obj;
         }
 
         public virtual void RemoveObject(T obj)
         {
-            var gameObj = obj as GameObject;
-            gameObj?.transform.SetParent(this.poolContainer);
-            gameObj?.gameObject.SetActive(false);
+            obj.transform.SetParent(this.poolContainer);
+            obj.gameObject.SetActive(false);
             this._objectPool.Enqueue(obj);
         }
     }

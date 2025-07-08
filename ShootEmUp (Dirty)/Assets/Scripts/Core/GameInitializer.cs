@@ -17,9 +17,6 @@ namespace Core
 
         private void Awake()
         {
-            var tmp = this.TryGetComponent<PlayerInputService>(out var playerInputService);
-            playerInputService.ini
-            
             this._playerController = new PlayerController(
                 this.playerUnit,
                 this.playerInputService,
